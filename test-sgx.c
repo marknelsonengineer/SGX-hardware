@@ -1,7 +1,10 @@
 #include <stdio.h>
+#include <time.h>
 #if defined(_MSC_VER)
 #include <intrin.h>
 #endif
+
+#define NEW_VERSION "1.1.0"
 
 static inline void native_cpuid(unsigned int *eax, unsigned int *ebx,
 	unsigned int *ecx, unsigned int *edx)
@@ -32,6 +35,12 @@ static inline void native_cpuid(unsigned int *eax, unsigned int *ebx,
 int main(int argc, char **argv)
 {
   /* This programm prints some CPUID information and tests the SGX support of the CPU */
+
+  // get current timestamp
+  time_t tm;
+  time(&tm);
+  // print version number and timestamp
+  printf("Start test-sgx (version %s) at %s\n\n", NEW_VERSION, ctime(&tm));
 
   unsigned eax, ebx, ecx, edx;
   eax = 1; /* processor info and feature bits */
